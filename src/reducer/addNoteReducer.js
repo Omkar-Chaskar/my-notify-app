@@ -16,7 +16,8 @@ export function reducer(state ,action){
         ...state,
         archive: state.archive.concat(action.payload),
         notes: state.notes.filter((item) => item.id !== action.payload.id),
-        trash: state.trash.filter((item) => item.id !== action.payload.id)
+        trash: state.trash.filter((item) => item.id !== action.payload.id),
+        pin: state.pin.filter((item) => item.id !== action.payload.id)
       };
   
     case "REMOVE_FROM_ARCHIVE_NOTES":
@@ -61,7 +62,8 @@ export function reducer(state ,action){
     case "ADD_TO_PIN_NOTES":
       return { ...state,
         pin: state.pin.concat(action.payload),
-        notes: state.notes.filter((item) => item.id !== action.payload.id)
+        notes: state.notes.filter((item) => item.id !== action.payload.id),
+        archive: state.archive.filter((item) => item.id !== action.payload.id)
       };
 
     case "REMOVE_FROM_PIN_NOTES":
