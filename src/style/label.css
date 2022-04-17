@@ -1,0 +1,12 @@
+.Label {
+    width: fit-content;
+    height: 100%;
+    margin: auto;
+    padding-top: 1rem;
+}
+
+.label-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}

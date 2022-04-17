@@ -1,0 +1,16 @@
+.filter-container {
+    min-width: 25rem;
+    max-width: 60vw;
+    height: auto;
+    margin : auto;
+}
+
+.filter-bar {
+    border: 2px solid var(--gray-500);
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items:center ;
+    height: 2.5rem;
+    padding-right: 0.5rem;
+}

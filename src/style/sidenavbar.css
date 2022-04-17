@@ -1,0 +1,18 @@
+.text-dark {
+  color: var(--dark);font-weight: bold;
+}
+
+.sidebar-nav-list {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar-nav {
+      position: relative;
+      border-bottom: none;
+    }
+    .sidebar-nav-contain {
+      justify-content: space-evenly;
+    }
+  }
+  
