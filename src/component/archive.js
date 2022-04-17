@@ -1,4 +1,5 @@
 import "../styles.css";
+import { BsPin } from "react-icons/bs";
 import {
   MdOutlineColorLens,
   MdLabelOutline,
@@ -6,59 +7,90 @@ import {
   MdDeleteOutline,
   MdPushPin
 } from "react-icons/md";
+import {useNotes} from "../context/noteProvider";
 
 export default function Archive() {
+  const { state ,dispatch } = useNotes();
 
   return (
     <div className="Label">
       <div className="label-header">
         <h4>Archive</h4>
-        <MdDeleteOutline className="p4 text-grey ptr"/>
+        <MdDeleteOutline className="p4 text-grey ptr"
+        onClick={() =>
+          dispatch({ 
+            type: "ADD_ALL_ARCHIVE_TO_TRASH_NOTES", 
+            payload: state.archive 
+          })
+        }
+        />
       </div>
+      {state.archive < 1 ? (
+        <p className="p3 bold center">
+          There is no notes in archive. Please add some notes in archive.
+        </p>
+      ) : (
         <ul className="flex-col">
-        <li className="card">
+          {state.archive &&
+            state.archive.map((note) => {
+              return (
+        <li className="card" key={note.id}>
           <div className="card__primary-action card__primary-action-column">
-            <MdPushPin name="pin item" className="badge-up-right-corner p3 text-grey ptr" />
+          {state.pin &&
+                  state.pin.some((item) => note.id === item.id) ? (
+                    <MdPushPin name="pin item" className="badge-up-right-corner p3 text-grey ptr" 
+                      onClick={() =>
+                        dispatch({
+                          type: "REMOVE_FROM_PIN_NOTES",
+                          payload: note
+                        })
+                      }
+                    />
+                  ) : (
+                    <BsPin name="pin item" className="badge-up-right-corner p3 text-grey ptr" 
+                      onClick={() =>
+                        dispatch({ type: "ADD_TO_PIN_NOTES", payload: note })
+                      }
+                    />
+                  )}
             <div className="card__primary">
-              <h2 className="p3 bold">Note Title....</h2>
-              <p className="p2">Note body....</p>
+              <h2 className="p3 bold">{note.title}</h2>
+              <p className="p2">{note.body}</p>
               <div className="flex card-badges">
-                <p className="card-label p1">Label 1</p>
+                <p className="card-label p1">{note.label}</p>
               </div>
             </div>
           </div>
           <div className="card__actions">
-            <p className="text-grey p1">Created on 26/10/2021</p>
+            <p className="text-grey p1">Created on {note.date}</p>
             <div className="card__action-icons p3 text-grey">
               <MdOutlineColorLens className="ptr"/>
               <MdLabelOutline className="ptr"/>
-              <MdArchive className="ptr"/>
-              <MdDeleteOutline className="ptr"/>
+              {state.archive &&
+                  state.archive.some((item) => note.id === item.id) && (
+                    <MdArchive name="archive item" className="ptr" 
+                      onClick={() =>
+                        dispatch({
+                          type: "REMOVE_FROM_ARCHIVE_NOTES",
+                          payload: note
+                        })
+                      }
+                    />
+                  )}
+
+                    <MdDeleteOutline name="trash item" className="ptr" 
+                      onClick={() =>
+                        dispatch({ type: "ADD_TO_TRASH_NOTES", payload: note })
+                      }
+                    />
+
             </div>
           </div>
         </li>
-        <li className="card">
-          <div className="card__primary-action card__primary-action-column">
-            <MdPushPin name="pin item" className="badge-up-right-corner p3 text-grey ptr" />
-            <div className="card__primary">
-              <h2 className="p3 bold">Note Title....</h2>
-              <p className="p2">Note body....</p>
-              <div className="flex card-badges">
-                <p className="card-label p1">Label 2</p>
-              </div>
-            </div>
-          </div>
-          <div className="card__actions">
-            <p className="text-grey p1">Created on 26/10/2021</p>
-            <div className="card__action-icons p3 text-grey">
-              <MdOutlineColorLens className="ptr"/>
-              <MdLabelOutline className="ptr"/>
-              <MdArchive className="ptr"/>
-              <MdDeleteOutline className="ptr"/>
-            </div>
-          </div>
-        </li>
-        </ul>
+         );
+        })}
+      </ul>
+      )}
     </div>
   );
 }
