@@ -1,0 +1,35 @@
+
+.add-note-container {
+    width: 100%;
+    min-height: max-content;
+    margin: auto;
+    padding: 2rem;
+}
+
+.note-title-container ,
+.note-body-container ,
+.note-label-container ,
+.note-priority-container {
+    min-width: 20rem;
+    padding-bottom: 1rem;
+}
+
+.note-textarea {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+}
+
+.note-label-container ,
+.note-priority-container {
+    border: 1px solid var(--gray-400);
+    padding-top: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}

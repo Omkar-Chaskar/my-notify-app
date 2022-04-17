@@ -1,3 +1,16 @@
+@import "https://getratha.netlify.app/styles.css";
+@import "./style/sidenavbar.css";
+@import "./style/card.css";
+@import "./style/header.css";
+@import "./style/label.css";
+@import "./style/addnote.css";
+@import "./style/filter.css";
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -1,43 +1,25 @@
-import "./App.css";
-import logo from "./logo.png";
+import "./styles.css";
+import { Routes, Route } from "react-router-dom";
+import Header from "./component/header";
+import Navigation from "./component/navigation";
+import Home from "./component/home";
+import Archive from "./component/archive";
+import Label from "./component/label";
+import Trash from "./component/trash";
+import AddNote from "./component/addnote";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>mockBee!</span>
-        </h1>
-        <p className="brand-description">
-          Get started by editing <code>src/App.js</code>
-        </p>
-        <div className="links">
-          <a
-            href="https://mockbee.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Explore mockBee
-          </a>
-          <a
-            href="https://mockbee.netlify.app/docs/api/introduction"
-            target="_blank"
-            rel="noreferrer"
-          >
-            API Documentation
-          </a>
-          <a
-            href="https://github.com/neogcamp/mockBee"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
+      <Header />
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="Label" element={<Label />} />
+        <Route path="Archive" element={<Archive />} />
+        <Route path="Trash" element={<Trash />} />
+        <Route path="AddNote" element={<AddNote />} />
+      </Routes>
     </div>
   );
 }
-
-export default App;
