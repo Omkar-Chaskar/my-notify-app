@@ -1,96 +1,57 @@
 import "../styles.css";
-import { BsPin } from "react-icons/bs";
 import {
-  MdOutlineColorLens,
-  MdLabelOutline,
-  MdArchive,
-  MdDeleteOutline,
-  MdPushPin
+  MdOutlineArchive,
+  MdDelete
 } from "react-icons/md";
-import {useNotes} from "../context/noteProvider";
+import {useArchive , useTrash} from "../context";
+import { Toasters } from "./toasters";
 
 export default function Archive() {
-  const { state ,dispatch } = useNotes();
+  const { archive , restoreArchiveHandler } = useArchive();
+  const { archiveToTrashHandler } = useTrash();
 
   return (
     <div className="Label">
       <div className="label-header">
         <h4>Archive</h4>
-        <MdDeleteOutline className="p4 text-grey ptr"
-        onClick={() =>
-          dispatch({ 
-            type: "ADD_ALL_ARCHIVE_TO_TRASH_NOTES", 
-            payload: state.archive 
-          })
-        }
-        />
       </div>
-      {state.archive < 1 ? (
+      {archive < 1 ? (
         <p className="p3 bold center">
           There is no notes in archive. Please add some notes in archive.
         </p>
       ) : (
         <ul className="flex-col">
-          {state.archive &&
-            state.archive.map((note) => {
+          {archive &&
+            archive.map((note) => {
               return (
-        <li className="card" key={note.id}>
-          <div className="card__primary-action card__primary-action-column">
-          {state.pin &&
-                  state.pin.some((item) => note.id === item.id) ? (
-                    <MdPushPin name="pin item" className="badge-up-right-corner p3 text-grey ptr" 
-                      onClick={() =>
-                        dispatch({
-                          type: "REMOVE_FROM_PIN_NOTES",
-                          payload: note
-                        })
-                      }
-                    />
-                  ) : (
-                    <BsPin name="pin item" className="badge-up-right-corner p3 text-grey ptr" 
-                      onClick={() =>
-                        dispatch({ type: "ADD_TO_PIN_NOTES", payload: note })
-                      }
-                    />
-                  )}
-            <div className="card__primary">
-              <h2 className="p3 bold">{note.title}</h2>
-              <p className="p2">{note.body}</p>
-              <div className="flex card-badges">
-                <p className="card-label p1">{note.label}</p>
-              </div>
-            </div>
-          </div>
-          <div className="card__actions">
-            <p className="text-grey p1">Created on {note.date}</p>
-            <div className="card__action-icons p3 text-grey">
-              <MdOutlineColorLens className="ptr"/>
-              <MdLabelOutline className="ptr"/>
-              {state.archive &&
-                  state.archive.some((item) => note.id === item.id) && (
-                    <MdArchive name="archive item" className="ptr" 
-                      onClick={() =>
-                        dispatch({
-                          type: "REMOVE_FROM_ARCHIVE_NOTES",
-                          payload: note
-                        })
-                      }
-                    />
-                  )}
-
-                    <MdDeleteOutline name="trash item" className="ptr" 
-                      onClick={() =>
-                        dispatch({ type: "ADD_TO_TRASH_NOTES", payload: note })
-                      }
-                    />
-
-            </div>
-          </div>
-        </li>
-         );
-        })}
+                <li className="card" key={note._id} style={{backgroundColor: note.color}}>
+                  <div className="card__primary-action card__primary-action-column">
+                    <div className="card__primary">
+                      <h2 className="p3 bold">{note.title}</h2>
+                      <p className="p2">{note.content}</p>
+                      <div className="flex card-badges bold">
+                        <p className="card-label p1">{note.label}</p>
+                      </div>
+                      <div className="flex flex-align-end">
+                        <p className=" p1 bold">{note.priority}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card__actions">
+                    <p className="text-grey p1">Created on {note.date}</p>
+                    <div className="card__action-icons p3 text-grey">
+                      <MdOutlineArchive name="archive item" className="ptr" title="Archive"
+                      onClick={ () => restoreArchiveHandler(note , note._id)}/>
+                      <MdDelete name="trash item" className="ptr" title="Trash"
+                      onClick={ () => archiveToTrashHandler(note , note._id)}/>
+                    </div>
+                  </div>
+                </li>
+              )
+          })}
       </ul>
       )}
+      <Toasters />
     </div>
   );
 }

@@ -5,6 +5,7 @@
 @import "./style/label.css";
 @import "./style/addnote.css";
 @import "./style/filter.css";
+@import "./style/login.css";
 
 .App {
   font-family: sans-serif;

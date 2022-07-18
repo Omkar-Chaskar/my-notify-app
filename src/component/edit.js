@@ -6,8 +6,8 @@ import { BsPin } from "react-icons/bs";
 import { MdPushPin } from "react-icons/md";
 import { Toasters } from "./toasters";
 
-export default function AddNote() {
-  const { state ,dispatch, addNewNoteHandler } = useNotes();
+export default function EditNote() {
+  const { state ,dispatch ,updateNoteHandler } = useNotes();
 
   const labels = ["Home" , "Work" , "Study" , "Gym" , "Health"];
   const priority = ["High" , "Medium" , "Low"]
@@ -15,26 +15,49 @@ export default function AddNote() {
 
   return (
     <div className="AddNote">
+
       <form className="add-note-container" 
       onSubmit={ (e) => {
+
       e.preventDefault()
       dispatch({ type: "SET_DATE", payload: dayjs().format("YYYY-MM-DD") })
-      addNewNoteHandler(state)
+      updateNoteHandler(state , state._id)
       dispatch({ type: "CLEAR_NOTE" });
+
       }}>
         <section className="note-title-container">
+
           <textarea id="w3review" name="notetittle" rows="2" cols="50" placeholder="Note Tittle" className="note-textarea" 
           value={state.title}
           onChange={(e) => dispatch({ type: "SET_TITLE", payload: e.target.value })}/>
+
         </section>
+
         <section className="note-body-container">
+
           <textarea id="w3review" name="notebody" rows="6" cols="50" placeholder="Note body" className="note-textarea" value={state.content}
                     onChange={(e) => dispatch({ type: "SET_CONTENT", payload: e.target.value })}/>
+
         </section>
+
         <ul className="note-label-container list p1 bold">
-          {state.pin ?<li><MdPushPin name="pin item" className="p3 text-grey ptr" title="pinned note" onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/><p>Unpin Note</p></li> 
-          : <li><BsPin name="pin item" className="p3 text-grey ptr" title="unpined note" onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/><p>Pin Note</p></li> }  
+
+          {
+          state.pin ?
+            <li>
+                <MdPushPin name="pin item" className="p3 text-grey ptr" title="pinned note"
+                onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/>
+                <p>Unpin Note</p>
+            </li> 
+          : 
+            <li>
+                <BsPin name="pin item" className="p3 text-grey ptr" title="unpined note"
+                onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/>
+                <p>Pin Note</p>
+            </li> }
+          
         </ul>
+
         <section>
           <ul className="note-label-container list">
           {labels.map( (label , index) => {
@@ -77,7 +100,8 @@ export default function AddNote() {
           })}
           </ul>
         </section>
-          <button className="button button-secondary ptr bold" type="submit">Save</button>
+
+          <button className="button button-secondary ptr bold" type="submit">Update</button>
       </form>
       <Toasters />
     </div>
