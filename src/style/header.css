@@ -1,5 +1,21 @@
 .navigation {
     position: sticky;
     top : 0;
-    z-index: 10;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: auto 2rem;
 }
+
+.doc-container {
+    height: 100vh;
+    padding: 0 1rem;
+    background-color: var(--gray-100);
+}
+
+@media screen and (max-width: 800px) {
+    .doc-container {
+        position: relative;
+        top: 0;
+    }
+} 
