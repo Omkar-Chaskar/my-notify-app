@@ -32,8 +32,18 @@ export default function AddNote() {
                     onChange={(e) => dispatch({ type: "SET_CONTENT", payload: e.target.value })}/>
         </section>
         <ul className="note-label-container list p1 bold">
-          {state.pin ?<li><MdPushPin name="pin item" className="p3 text-grey ptr" title="pinned note" onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/><p>Unpin Note</p></li> 
-          : <li><BsPin name="pin item" className="p3 text-grey ptr" title="unpined note" onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/><p>Pin Note</p></li> }  
+          {state.pin ?
+          <li>
+            <MdPushPin name="pin item" className="p3 text-grey ptr" title="pinned note"
+              onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/>
+              <p>Unpin Note</p>
+           </li> 
+          : <li>
+              <BsPin name="pin item" className="p3 text-grey ptr" title="unpined note"
+                onClick={() => {dispatch({ type: "SET_PIN", payload: !state.pin })}}/>
+                <p>Pin Note</p>
+             </li> 
+            }  
         </ul>
         <section>
           <ul className="note-label-container list">
