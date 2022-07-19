@@ -3,8 +3,7 @@ import "../styles.css";
 import { useAuth } from "../context";
 
 export default function Header() {
-  const { logOutHandler, user } = useAuth();
-  const { loginStatus } = user;
+  const { logoutHandler , user: { loginStatus} } = useAuth()
 
   return (
     <nav className="navigation head-nav">
