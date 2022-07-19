@@ -1,6 +1,5 @@
 import "../styles.css";
 import { useNotes } from "../context/noteProvider";
-// import {Link} from "react-router-dom";
 import dayjs from "dayjs";
 import { BsPin } from "react-icons/bs";
 import { MdPushPin } from "react-icons/md";
