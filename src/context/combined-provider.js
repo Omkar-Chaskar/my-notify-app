@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  FilterProvider,
   NotesProvider,
   ArchiveProvider,
   TrashProvider,
@@ -11,7 +12,9 @@ const CombinedProvider = ({ children }) => {
     <TrashProvider>
       <ArchiveProvider>
         <NotesProvider>
+          <FilterProvider>
           <AuthProvider>{children}</AuthProvider>
+          </FilterProvider>
         </NotesProvider>
       </ArchiveProvider>
     </TrashProvider>
