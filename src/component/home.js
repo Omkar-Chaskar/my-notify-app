@@ -2,6 +2,7 @@ import "../styles.css";
 import { useNotes } from "../context/noteProvider";
 import Pin from "./pin";
 import Note from "./note";
+import Filter from "./filter"
 import { Toasters } from "./toasters";
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
           There is no note in present. Please add some notes from Add New Note.
         </p>
       ) : (
-        <><Pin /><Note /></>
+        <><Filter /><Pin /><Note /></>
       )}
 
       <Toasters />

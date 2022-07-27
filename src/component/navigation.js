@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "../styles.css";
 import {
   MdOutlineHome,
-  MdLabelOutline
 } from "react-icons/md";
 import {GoArchive , GoTrashcan} from "react-icons/go"
 
@@ -13,11 +12,6 @@ export default function Navigation() {
         <li className="sidebar-nav-list">
           <Link className="text-dark" to="/">
             <MdOutlineHome className="p4 "/> Home
-          </Link>
-        </li>
-        <li className="sidebar-nav-list">
-          <Link className="text-dark" to="Label">
-            <MdLabelOutline className="p4"/> Label
           </Link>
         </li>
         <li className="sidebar-nav-list">

@@ -3,7 +3,6 @@ import {reducer} from "../reducer/addNoteReducer"
 import axios from "axios";
 import { addNewNote, updateNote} from "../services";
 import toast from "react-hot-toast";
-import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
 const NotesContext = createContext()
@@ -15,10 +14,10 @@ const NotesProvider = ({children}) => {
       title: "",
       content: "",
       color: "",
-      label: [],
+      tags: [],
       priority: [],
       pin: false,
-      date: dayjs().format("YYYY-MM-DD"),
+      date: new Date() ,
     })
 
     useEffect(() => {

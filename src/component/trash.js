@@ -25,13 +25,19 @@ export default function Trash() {
                 >
                   <div className="card__primary-action card__primary-action-column">
                     <div className="card__primary">
-                      <h2 className="p3 bold">{note.title}</h2>
-                      <p className="p2">{note.content}</p>
-                      <div className="flex card-badges bold">
-                        <p className="card-label p1">{note.label}</p>
+                      <h2 className="note-title">{note.title}</h2>
+                      <h5 className="note-content">{note.content}</h5>
+                      <div className="flex card-badges bold ">
+                        {note.tags.map((tag, index) => {
+                          return (
+                            <p className="card-label p1 tag" key={index}>
+                              {tag}
+                            </p>
+                          );
+                        })}
                       </div>
                       <div className="flex flex-align-end">
-                        <p className=" p1 bold">{note.priority}</p>
+                        <p className=" p2 bold">{note.priority}</p>
                       </div>
                     </div>
                   </div>
